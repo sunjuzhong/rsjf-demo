@@ -1,0 +1,46 @@
+name: Simple GitHub Pages Deploy
+
+# 仅在需要时使用此备用部署工作流
+# 如果主要deploy.yml工作流持续失败，可以使用此工作流
+
+on:
+  # 默认不会自动触发
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+        
+      - name: 设置Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: 安装依赖
+        run: |
+          npm ci || npm install
+          
+      - name: 构建项目
+        run: |
+          npm run build
+          
+      - name: 验证构建输出
+        run: |
+          if [ -d "dist" ] && [ -f "dist/index.html" ]; then
+            echo "✅ 构建成功"
+          else
+            echo "❌ 构建失败"
+            exit 1
+          fi
+          
+      - name: 部署到gh-pages分支
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
+          clean: true
+          # 使用GITHUB_TOKEN避免权限问题
+          token: ${{ secrets.GITHUB_TOKEN }}
