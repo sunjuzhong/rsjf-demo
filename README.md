@@ -4,7 +4,7 @@
 
 ## 🌐 在线演示
 
-访问 [GitHub Pages 演示页面](https://juzhongsun.github.io/schema-demos/) 查看在线演示。
+访问 [GitHub Pages 演示页面](https://sunjuzhong.github.io/rsjf-demo/) 查看在线演示。
 
 ## 功能特性
 
@@ -71,7 +71,7 @@ git push origin main
 
 3. 等待GitHub Actions完成构建和部署
 
-4. 访问 `https://your-username.github.io/schema-demos/` 查看部署结果
+4. 访问 `https://sunjuzhong.github.io/rsjf-demo/` 查看部署结果
 
 ### 本地预览构建结果
 
